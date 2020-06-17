@@ -17,9 +17,9 @@ class MyApp extends StatelessWidget {
   }
 }
  */
-
+/* 
+import 'package:Timeliner/screens/use_case.dart';
 import 'package:flutter/material.dart';
-import 'package:Timeliner/ui/main_page.dart';
 
 void main() => runApp(MyApp());
 
@@ -33,7 +33,20 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         home: new Scaffold(
             body: new Container(
-          child: new MainPage(),
+          child: new TrackIt(),
         )));
   }
+}
+ */
+
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import "package:Timeliner/place_tracker/place_tracker_app.dart";
+
+void main() {
+  runApp(ChangeNotifierProvider(
+    create: (context) => AppState(),
+    child: PlaceTrackerApp(),
+  ));
 }

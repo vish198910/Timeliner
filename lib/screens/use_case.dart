@@ -1,3 +1,4 @@
+import 'package:Timeliner/ui/main_page.dart';
 import 'package:flutter/material.dart';
 
 class TrackIt extends StatefulWidget {
@@ -22,21 +23,26 @@ class _TrackItState extends State<TrackIt> {
       body: Container(
         child: ListView(children: <Widget>[
           SizedBox(
-            height: 20,
+            height: 200,
             child: GestureDetector(
-              child: Text("Bio"),
+              child: Center(child: Text("Bio")),
             ),
           ),
           SizedBox(
-            height: 20,
+            height: 200,
             child: GestureDetector(
-              child: Text("Resume"),
+              onTap: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context){
+                  return MainPage();
+                }));
+              },
+              child: Center(child: Text("Resume")),
             ),
           ),
           SizedBox(
-            height: 20,
+            height: 200,
             child: GestureDetector(
-              child: Text("Location"),
+              child: Container(child: Center(child: Text("Location"))),
             ),
           ),
         ]),
