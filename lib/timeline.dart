@@ -1,3 +1,5 @@
+import 'package:Timeliner/experiences.dart';
+import 'package:Timeliner/utils/beautify.dart';
 import 'package:flutter/material.dart';
 import 'package:timeline_list/timeline.dart';
 import 'package:timeline_list/timeline_model.dart';
@@ -45,9 +47,10 @@ class _TimelinePageState extends State<TimelinePage> {
               ),
             ]),
         appBar: AppBar(
+          elevation: 50,
           title: Text(widget.title),
           centerTitle: true,
-          backgroundColor: Colors.deepPurpleAccent,
+          backgroundColor: firstColor,
         ),
         body: PageView(
           onPageChanged: (i) => setState(() => pageIx = i),
@@ -58,17 +61,17 @@ class _TimelinePageState extends State<TimelinePage> {
 
   timelineModel(TimelinePosition position) => Timeline.builder(
       itemBuilder: centerTimelineBuilder,
-      itemCount: doodles.length,
+      itemCount: experiences.length,
       physics: position == TimelinePosition.Left
           ? ClampingScrollPhysics()
           : BouncingScrollPhysics(),
       position: position);
 
   TimelineModel centerTimelineBuilder(BuildContext context, int i) {
-    final doodle = doodles[i];
-    final textTheme = Theme.of(context).textTheme;
+    final doodle = experiences[i];
     return TimelineModel(
         Card(
+          color: firstColor,
           margin: EdgeInsets.symmetric(vertical: 16.0),
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
@@ -78,17 +81,17 @@ class _TimelinePageState extends State<TimelinePage> {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
-                Image.network(doodle.doodle),
+                Image.network(""),
                 const SizedBox(
                   height: 8.0,
                 ),
-                Text(doodle.time, style: textTheme.caption),
+                Text(doodle.date, style: TextStyle(color: Colors.white)),
                 const SizedBox(
                   height: 8.0,
                 ),
                 Text(
-                  doodle.name,
-                  style: textTheme.title,
+                  doodle.jobTitle,
+                  style: TextStyle(color:Colors.white),
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(

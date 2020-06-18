@@ -6,10 +6,14 @@ class Experience {
   final String date;
   final Color color;
   final bool active;
+  final Icon icon;
+  final Color iconBackground;
   final String description;
 
   Experience(
       {this.jobTitle,
+      this.icon,
+      this.iconBackground,
       this.company,
       this.date,
       this.color,

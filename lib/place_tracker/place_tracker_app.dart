@@ -1,3 +1,4 @@
+import 'package:Timeliner/utils/beautify.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
@@ -29,6 +30,7 @@ class _PlaceTrackerHomePage extends StatelessWidget {
     var state = Provider.of<AppState>(context);
     return Scaffold(
       appBar: AppBar(
+        elevation: 50,
         title: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: const <Widget>[
@@ -39,7 +41,7 @@ class _PlaceTrackerHomePage extends StatelessWidget {
             Text('Place Tracker'),
           ],
         ),
-        backgroundColor: Colors.green[700],
+        backgroundColor: firstColor,
         actions: <Widget>[
           Padding(
             padding: EdgeInsets.fromLTRB(0.0, 0.0, 16.0, 0.0),
@@ -64,7 +66,7 @@ class _PlaceTrackerHomePage extends StatelessWidget {
       body: IndexedStack(
         index: state.viewType == PlaceTrackerViewType.map ? 0 : 1,
         children: <Widget>[
-          PlaceMap(center: const LatLng(45.521563, -122.677433)),
+          PlaceMap(center: const LatLng(26.922070, 75.778885)),
           PlaceList()
         ],
       ),

@@ -39,14 +39,15 @@ class MyApp extends StatelessWidget {
 }
  */
 
+import 'package:Timeliner/screens/use_case.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import "package:Timeliner/place_tracker/place_tracker_app.dart";
 
 void main() {
-  runApp(ChangeNotifierProvider(
-    create: (context) => AppState(),
-    child: PlaceTrackerApp(),
+  runApp(MaterialApp(
+    debugShowCheckedModeBanner: false,
+    home:TrackIt()
   ));
 }

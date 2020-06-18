@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:math';
+import 'package:Timeliner/utils/beautify.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -421,9 +422,12 @@ class _CategoryButtonBar extends StatelessWidget {
           alignment: MainAxisAlignment.center,
           children: <Widget>[
             RaisedButton(
+              shape: RoundedRectangleBorder(
+                borderRadius:BorderRadius.circular(20)
+              ),
               color: selectedPlaceCategory == PlaceCategory.favorite
-                  ? Colors.green[700]
-                  : Colors.lightGreen,
+                  ? firstColor
+                  : secondColor,
               child: const Text(
                 'Favorites',
                 style: TextStyle(color: Colors.white, fontSize: 14.0),
@@ -431,9 +435,12 @@ class _CategoryButtonBar extends StatelessWidget {
               onPressed: () => onChanged(PlaceCategory.favorite),
             ),
             RaisedButton(
+              shape: RoundedRectangleBorder(
+                borderRadius:BorderRadius.circular(20)
+              ),
               color: selectedPlaceCategory == PlaceCategory.visited
-                  ? Colors.green[700]
-                  : Colors.lightGreen,
+                  ? firstColor
+                  : secondColor,
               child: const Text(
                 'Visited',
                 style: TextStyle(color: Colors.white, fontSize: 14.0),
@@ -441,9 +448,12 @@ class _CategoryButtonBar extends StatelessWidget {
               onPressed: () => onChanged(PlaceCategory.visited),
             ),
             RaisedButton(
+              shape: RoundedRectangleBorder(
+                borderRadius:BorderRadius.circular(20)
+              ),
               color: selectedPlaceCategory == PlaceCategory.wantToGo
-                  ? Colors.green[700]
-                  : Colors.lightGreen,
+                  ? firstColor
+                  : secondColor,
               child: const Text(
                 'Want To Go',
                 style: TextStyle(color: Colors.white, fontSize: 14.0),
@@ -483,7 +493,10 @@ class _AddPlaceButtonBar extends StatelessWidget {
           alignment: MainAxisAlignment.center,
           children: <Widget>[
             RaisedButton(
-              color: Colors.blue,
+              shape: RoundedRectangleBorder(
+                borderRadius:BorderRadius.circular(20)
+              ),
+              color: firstColor,
               child: const Text(
                 'Save',
                 style: TextStyle(color: Colors.white, fontSize: 16.0),
@@ -491,7 +504,10 @@ class _AddPlaceButtonBar extends StatelessWidget {
               onPressed: onSavePressed,
             ),
             RaisedButton(
-              color: Colors.red,
+              shape: RoundedRectangleBorder(
+                borderRadius:BorderRadius.circular(20)
+              ),
+              color: secondColor,
               child: const Text(
                 'Cancel',
                 style: TextStyle(color: Colors.white, fontSize: 16.0),
@@ -533,7 +549,7 @@ class _MapFabs extends StatelessWidget {
               heroTag: 'add_place_button',
               onPressed: onAddPlacePressed,
               materialTapTargetSize: MaterialTapTargetSize.padded,
-              backgroundColor: Colors.green,
+              backgroundColor: firstColor,
               child: const Icon(Icons.add_location, size: 36.0),
             ),
             SizedBox(height: 12.0),
@@ -542,7 +558,7 @@ class _MapFabs extends StatelessWidget {
               onPressed: onToggleMapTypePressed,
               materialTapTargetSize: MaterialTapTargetSize.padded,
               mini: true,
-              backgroundColor: Colors.green,
+              backgroundColor: firstColor,
               child: const Icon(Icons.layers, size: 28.0),
             ),
           ],
