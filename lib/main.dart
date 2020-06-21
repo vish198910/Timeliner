@@ -41,7 +41,7 @@ class MyApp extends StatelessWidget {
 
 import 'package:Timeliner/screens/use_case.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+
 
 void main() {
   runApp(MaterialApp(

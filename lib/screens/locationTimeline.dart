@@ -110,6 +110,6 @@ class _LocationTimelinePageState extends State<LocationTimelinePage> {
         isFirst: i == 0,
         isLast: i == doodles.length,
         iconBackground: firstColor,
-        icon: Icon(Icons.timelapse));
+        icon: Icon(Icons.timelapse,color: Colors.white,));
   }
 }

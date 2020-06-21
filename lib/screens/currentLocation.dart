@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:typed_data';
 
 import 'package:Timeliner/database/database_helper.dart';
+import 'package:Timeliner/model/location.dart';
 import 'package:Timeliner/screens/locationTimeline.dart';
 import 'package:Timeliner/utils/beautify.dart';
 import 'package:flutter/material.dart';
@@ -36,6 +37,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Circle circle;
   GoogleMapController _controller;
   List<Map<String, dynamic>> locationList = [];
+  int locations = 0;
 
   final dbHelper = DatabaseHelper.instance;
 
@@ -50,6 +52,29 @@ class _MyHomePageState extends State<MyHomePage> {
     return byteData.buffer.asUint8List();
   }
 
+  void _insert(double latitude, double longitude) async {
+    // row to insert
+    Map<String, dynamic> row = {
+      DatabaseHelper.columnLatitude: latitude,
+      DatabaseHelper.columnLongitude: longitude
+    };
+    final id = await dbHelper.insert(row);
+    print('inserted row id: $id');
+  }
+
+  Future<List<MyLocation>> _query() async {
+    final List<Map<String,dynamic>> allRows = await dbHelper.queryAllRows();
+    locations = allRows.length;
+    locationList = allRows;
+      return List.generate(allRows.length, (index) {
+      return MyLocation(
+        id: allRows[index]["id"],
+        latitude: allRows[index]["latitude"],
+        longitude: allRows[index]["longitude"]
+      );
+    });
+  
+  }
 
   void updateMarkerAndCircle(LocationData newLocalData, Uint8List imageData) {
     LatLng latlng = LatLng(newLocalData.latitude, newLocalData.longitude);
@@ -99,22 +124,18 @@ class _MyHomePageState extends State<MyHomePage> {
           "latitude": double.parse((newLocalData.latitude).toStringAsFixed(2)),
           "longitude": double.parse((newLocalData.longitude).toStringAsFixed(2))
         };
-        if (locationList.length == 0) {
-          locationList.add({
-            "latitude":
-                double.parse((newLocalData.latitude).toStringAsFixed(2)),
-            "longitude":
-                double.parse((newLocalData.longitude).toStringAsFixed(2))
-          });
+        _query();
+        if (locations == 0) {
+          _insert(double.parse((newLocalData.latitude).toStringAsFixed(2)),
+            double.parse((newLocalData.longitude).toStringAsFixed(2)));
         } else {
-          for (int i = 0; i < locationList.length; i++) {
+          for (int i = 0; i < locations; i++) {
             if (locationList[i]["latitude"] == location["latitude"] &&
                 locationList[i]["longitude"] == location["longitude"]) {
-
-                }
-                else{
-                    
-                }
+            } else {
+              _insert(double.parse((newLocalData.latitude).toStringAsFixed(2)),
+            double.parse((newLocalData.longitude).toStringAsFixed(2)));
+            }
           }
         }
       });
@@ -124,13 +145,24 @@ class _MyHomePageState extends State<MyHomePage> {
       }
     }
   }
-
+void _delete() async {
+    // Assuming that the number of rows is the id for the last row.
+    final id = await dbHelper.queryRowCount();
+    final rowsDeleted = await dbHelper.delete(id);
+    print('deleted $rowsDeleted row(s): row $id');
+  }
   @override
   void dispose() {
     if (_locationSubscription != null) {
       _locationSubscription.cancel();
     }
     super.dispose();
+  }
+
+  @override
+  void initState() {
+    _query();
+    super.initState();
   }
 
   @override
