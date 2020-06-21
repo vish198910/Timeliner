@@ -1,5 +1,7 @@
-import 'package:Timeliner/place_tracker/place_tracker_app.dart';
-import 'package:Timeliner/timeline.dart';
+import 'package:Timeliner/experiences.dart';
+//import 'package:Timeliner/place_tracker/place_tracker_app.dart';
+import 'package:Timeliner/screens/currentLocation.dart';
+import 'timeline.dart';
 import 'package:Timeliner/utils/beautify.dart';
 import 'package:provider/provider.dart';
 import 'package:Timeliner/ui/main_page.dart';
@@ -37,7 +39,7 @@ class _TrackItState extends State<TrackIt> {
               child: GestureDetector(
                 onTap: (){
                   Navigator.push(context, MaterialPageRoute(builder: (context){
-                    return TimelinePage(title: "JOURNAL",);
+                    return TimelinePage(title: "JOURNAL",list:experiences);
                   }));
                 },
                 child: CircleAvatar(
@@ -69,10 +71,7 @@ class _TrackItState extends State<TrackIt> {
               child: GestureDetector(
                 onTap: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return ChangeNotifierProvider(
-                      create: (context) => AppState(),
-                      child: PlaceTrackerApp(),
-                    );
+                    return MyApp();
                   }));
                 },
                 child: CircleAvatar(

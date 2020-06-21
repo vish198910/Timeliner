@@ -43,8 +43,6 @@ import 'package:Timeliner/screens/use_case.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import "package:Timeliner/place_tracker/place_tracker_app.dart";
-
 void main() {
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,

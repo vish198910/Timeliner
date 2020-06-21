@@ -60,8 +60,8 @@ class MyHomePage extends StatelessWidget {
   void _insert() async {
     // row to insert
     Map<String, dynamic> row = {
-      DatabaseHelper.columnName : 'Bob',
-      DatabaseHelper.columnAge  : 23
+      DatabaseHelper.columnLatitude : 26.55,
+      DatabaseHelper.columnLongitude  : 72.76
     };
     final id = await dbHelper.insert(row);
     print('inserted row id: $id');
@@ -77,8 +77,8 @@ class MyHomePage extends StatelessWidget {
     // row to update
     Map<String, dynamic> row = {
       DatabaseHelper.columnId   : 1,
-      DatabaseHelper.columnName : 'Mary',
-      DatabaseHelper.columnAge  : 32
+      DatabaseHelper.columnLatitude : 27.0,
+      DatabaseHelper.columnLongitude  : 73.0
     };
     final rowsAffected = await dbHelper.update(row);
     print('updated $rowsAffected row(s)');
