@@ -15,7 +15,7 @@ However the capacity of our brain remains limited and the events the younger gen
 Vishnu and I as budding philosophers believe that these moments and experiences are priceless as anything else and desperately need to be documented for us. 
 
 
-## Proposition   (Will definitly be vague at first)
+## Proposition   (Will definitely be vague at first)
 We wish to build a personal digital assistant for each individual that downloads this application.
 Will keep track of (if authorized):
     Places we have been to
