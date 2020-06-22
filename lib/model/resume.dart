@@ -8,4 +8,5 @@ class Resume{
   List<String> education;
   List<String> volunteer;
   List<String> awards;
+  
 }
