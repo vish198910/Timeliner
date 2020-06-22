@@ -2,8 +2,8 @@
 
 A new Flutter project.
 
-<img src="blob/master/appk.jpeg" width="170">
-https://github.com/vish198910/Timeliner/
+<img src="https://github.com/vish198910/Timeliner/blob/master/appk.jpeg" width="170">
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.
