@@ -7,7 +7,6 @@ import 'package:Timeliner/screens/locationTimeline.dart';
 import 'package:Timeliner/utils/beautify.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
 
@@ -132,6 +131,7 @@ class _MyHomePageState extends State<MyHomePage> {
           for (int i = 0; i < locations; i++) {
             if (locationList[i]["latitude"] == location["latitude"] &&
                 locationList[i]["longitude"] == location["longitude"]) {
+                  
             } else {
               _insert(double.parse((newLocalData.latitude).toStringAsFixed(2)),
             double.parse((newLocalData.longitude).toStringAsFixed(2)));
@@ -173,7 +173,10 @@ void _delete() async {
         backgroundColor: firstColor,
         actions: <Widget>[
           InkWell(
-            child: Icon(Icons.list),
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Icon(Icons.list),
+            ),
             onTap: () {
               Navigator.push(context, MaterialPageRoute(builder: (context) {
                 return LocationTimelinePage(

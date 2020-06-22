@@ -6,7 +6,7 @@ import 'package:timeline_list/timeline_model.dart';
 import "package:Timeliner/data.dart";
 
 class TimelinePage extends StatefulWidget {
-  TimelinePage({Key key, this.title,this.list}) : super(key: key);
+  TimelinePage({Key key, this.title, this.list}) : super(key: key);
   final String title;
   final List list;
   @override
@@ -17,6 +17,7 @@ class _TimelinePageState extends State<TimelinePage> {
   final PageController pageController =
       PageController(initialPage: 1, keepPage: true);
   int pageIx = 1;
+  TextEditingController textEditingController = new TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -27,39 +28,62 @@ class _TimelinePageState extends State<TimelinePage> {
     ];
 
     return Scaffold(
-        bottomNavigationBar: BottomNavigationBar(
-            currentIndex: pageIx,
-            onTap: (i) => pageController.animateToPage(i,
-                duration: const Duration(milliseconds: 300),
-                curve: Curves.easeInOut),
-            items: const [
-              BottomNavigationBarItem(
-                icon: Icon(Icons.format_align_left),
-                title: Text("LEFT"),
+      bottomNavigationBar: BottomNavigationBar(
+          currentIndex: pageIx,
+          onTap: (i) => pageController.animateToPage(i,
+              duration: const Duration(milliseconds: 300),
+              curve: Curves.easeInOut),
+          items: const [
+            BottomNavigationBarItem(
+              icon: Icon(Icons.format_align_left),
+              title: Text("LEFT"),
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.format_align_center),
+              title: Text("CENTER"),
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.format_align_right),
+              title: Text("RIGHT"),
+            ),
+          ]),
+      appBar: AppBar(
+        elevation: 50,
+        title: Text(widget.title),
+        centerTitle: true,
+        backgroundColor: firstColor,
+      ),
+      body: PageView(
+        onPageChanged: (i) => setState(() => pageIx = i),
+        controller: pageController,
+        children: pages,
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
+        backgroundColor: secondColor,
+        onPressed: () => showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: Text("What's new"),
+            content: TextField(
+              controller: textEditingController,
+            ),
+            actions: <Widget>[
+              MaterialButton(
+                onPressed: () {
+                  setState(() {});
+                  Navigator.of(context).pop(textEditingController.text.toString());
+                },
+                child: Text("Add"),
+                elevation: 5.0,
               ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.format_align_center),
-                title: Text("CENTER"),
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.format_align_right),
-                title: Text("RIGHT"),
-              ),
-            ]),
-        appBar: AppBar(
-          elevation: 50,
-          title: Text(widget.title),
-          centerTitle: true,
-          backgroundColor: firstColor,
+            ],
+          ),
         ),
-        body: PageView(
-          onPageChanged: (i) => setState(() => pageIx = i),
-          controller: pageController,
-          children: pages,
-        ));
+      ),
+    );
   }
 
-  
   timelineModel(TimelinePosition position) => Timeline.builder(
       itemBuilder: centerTimelineBuilder,
       itemCount: widget.list.length,
@@ -92,7 +116,7 @@ class _TimelinePageState extends State<TimelinePage> {
                 ),
                 Text(
                   doodle.jobTitle,
-                  style: TextStyle(color:Colors.white),
+                  style: TextStyle(color: Colors.white),
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(
@@ -107,6 +131,6 @@ class _TimelinePageState extends State<TimelinePage> {
         isFirst: i == 0,
         isLast: i == doodles.length,
         iconBackground: doodle.iconBackground,
-        icon: doodle.icon);
+        icon: Icon(Icons.timelapse));
   }
 }
