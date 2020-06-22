@@ -21,6 +21,7 @@ Will keep track of (if authorized):
     Our flagged moments, achievements or awards and even failures if we wish
     a To-Do list
     An up to date working resume of an entirely different kind.
+ The applications such an app can have in the future once it's fully functional are uncountable.
     
 
 ## Tech-Stack
